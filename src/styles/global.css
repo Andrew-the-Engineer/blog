@@ -30,8 +30,8 @@ body {
 	line-height: 1.7;
 }
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
+	width: 90%;
+	max-width: 900px;
 	margin: auto;
 	padding: 3em 1em;
 }
@@ -119,6 +119,36 @@ hr {
 	}
 	main {
 		padding: 1em;
+	}
+}
+@media (max-width: 720px) {
+	body {
+		font-size: 18px;
+	}
+	main {
+		padding: 1em;
+		width: 95%;
+	}
+}
+
+@media (min-width: 768px) {
+	main {
+		width: 85%;
+		max-width: 900px;
+	}
+}
+
+@media (min-width: 1200px) {
+	main {
+		width: 70%;
+		max-width: 1000px;
+	}
+}
+
+@media (min-width: 1600px) {
+	main {
+		width: 60%;
+		max-width: 1200px;
 	}
 }
 
