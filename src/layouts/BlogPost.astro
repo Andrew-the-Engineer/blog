@@ -8,32 +8,37 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tooltip, caption } = Astro.props;
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
 		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
 			.hero-image {
 				width: 100%;
+				margin: 0 auto;
 			}
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
 				border-radius: 12px;
 				box-shadow: var(--box-shadow);
+				max-width: 100%;
+				height: auto;
+			}
+			.hero-image-caption {
+				text-align: center;
+				font-size: 0.8em;
+				color: rgb(var(--gray));
+				margin: 0.5em 0 1em 0;
+				font-style: italic;
 			}
 			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
+				width: 100%;
+				box-sizing: border-box;
 				margin: auto;
-				padding: 1em;
+				padding: 1em 0;
 				color: rgb(var(--gray-dark));
 			}
 			.title {
@@ -52,6 +57,35 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.last-updated-on {
 				font-style: italic;
 			}
+			
+			/* Responsive adjustments */
+			@media (max-width: 720px) {
+				.hero-image {
+					max-width: 100%;
+				}
+				.hero-image-caption {
+					font-size: 0.7em;
+					margin: 0.3em 0 0.7em 0;
+				}
+				.prose {
+					width: 100%;
+					padding: 0.5em;
+				}
+				main {
+					width: calc(100% - 2em);
+					padding: 1em;
+				}
+			}
+			
+			@media (max-width: 480px) {
+				.hero-image-caption {
+					font-size: 0.6em;
+					margin: 0.2em 0 0.5em 0;
+				}
+				.title h1 {
+					font-size: 1.5em;
+				}
+			}
 		</style>
 	</head>
 
@@ -60,8 +94,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<main>
 			<article>
 				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+					{heroImage && <Image src={heroImage} alt="" title={tooltip || caption} />}
 				</div>
+				{caption && <p class="hero-image-caption">{caption}</p>}
 				<div class="prose">
 					<div class="title">
 						<div class="date">

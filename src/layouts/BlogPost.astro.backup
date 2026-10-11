@@ -1,0 +1,125 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage, tooltip, caption } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: 90%;
+				max-width: 900px;
+				margin: auto;
+padding: 3em 1em;;
+			}
+			.hero-image {
+				width: 100%;
+				max-width: 1020px;
+				margin: 0 auto;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+				max-width: 100%;
+				height: auto;
+			}
+			.hero-image-caption {
+				text-align: center;
+				font-size: 0.8em;
+				color: rgb(var(--gray));
+				margin: 0.5em 0 1em 0;
+				font-style: italic;
+			}
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+			}
+			.date {
+				margin-bottom: 0.5em;
+				color: rgb(var(--gray));
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+			
+			/* Responsive adjustments */
+			@media (max-width: 720px) {
+				.hero-image {
+					max-width: 100%;
+				}
+				.hero-image-caption {
+					font-size: 0.7em;
+					margin: 0.3em 0 0.7em 0;
+				}
+				.prose {
+					width: 100%;
+					padding: 0.5em;
+				}
+				main {
+					width: calc(100% - 2em);
+				}
+			}
+			
+			@media (max-width: 480px) {
+				.hero-image-caption {
+					font-size: 0.6em;
+					margin: 0.2em 0 0.5em 0;
+				}
+				.title h1 {
+					font-size: 1.5em;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="hero-image">
+					{heroImage && <Image src={heroImage} alt="" title={tooltip || caption} />}
+				</div>
+				{caption && <p class="hero-image-caption">{caption}</p>}
+				<div class="prose">
+					<div class="title">
+						<div class="date">
+							<FormattedDate date={pubDate} />
+							{updatedDate && (
+								<div class="last-updated-on">
+									Last updated on <FormattedDate date={updatedDate} />
+								</div>
+							)}
+						</div>
+						<h1>{title}</h1>
+						<hr />
+					</div>
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
