@@ -89,13 +89,30 @@ $$
 \text{Bytes per Parameter}
 $$
 
-For example, running a 70B paramater model, with floating point 16 precision (FP16 requires 2 bytes per number) would yield the following memory requirements. 
-
+For example, running a 70B paramater model, with floating point 16 precision (FP16 requires 2 bytes per number) would yield the following memory requirements.
 $$
 70 \times 10^9 \times 2 = 140 \times 10^9 \text{ bytes} = 140 \text{ Gigabytes}
 $$
 
+This is far beyond the 24GB of VRAM I have, and even beyond what is possible if we want to offload the model into RAM. However, the good news is that Quantization can be used to reduce memory requirements.
+It is also important to note here, that this is merely what is needed to store the model weights, other aspects of running the model could push our VRAM usage even higher. 
 
+### Quantization 
+
+Quantization is how we can reduce the memory requirements for running a given model. Generally during training a model is trained with with very high precision numbers. For example the weights could be calculated with Floating Point 32 accuracy. However, when using a trained model, most of the capability can be retained even 
+when representing the weights with lower precision numbers, while drastically saving on the memory requirements. For that same 70B parameter model we discussed, here is how different quantizations of weights could affect the memory requirements. 
+
+| Precision | Bits per Parameter | Approximate Weight Storage |
+|:----------|-------------------:|---------------------------:|
+| FP32      | 32                 | 240 GB                     |
+| FP16/BF16 | 16                 | 120 GB                     |
+| INT8      | 8                  | 60 GB                      |
+| INT4      | 4                  | 30 GB                      |
+| INT3      | 3                  | 22.5 GB                    |
+| INT2      | 2                  | 15 GB                      |
+ 
+
+For my first model, I chose **Qwen3-Coder-30B-A3B-Instruct in the Q4_K_M format**. Q4_K_M is a 4 bit precision format supported by llamma.cpp
 
 ## Software Setup
 

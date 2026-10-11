@@ -76,6 +76,72 @@ p {
 .prose p {
 	margin-bottom: 2em;
 }
+/* Keep wide Markdown content scrollable within the article. */
+.prose table {
+	display: block;
+	max-width: 100%;
+	overflow-x: auto;
+}
+.prose pre,
+.prose .katex-display {
+	box-sizing: border-box;
+	max-width: 100%;
+	overflow-x: auto;
+}
+.prose .katex-display {
+	padding: 0.25em 0;
+}
+.prose .katex-display > .katex {
+	width: max-content;
+	min-width: 100%;
+}
+.prose .mermaid svg {
+	max-width: 100%;
+	height: auto;
+}
+
+/* Technical blog tables */
+.prose table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5rem 0;
+	table-layout: auto;
+}
+
+/* Table headers */
+.prose th {
+	border: 1px solid #666;
+	padding: 14px 20px;
+	text-align: left;
+	font-weight: 600;
+	background-color: #242424;
+	color: #ffffff;
+}
+
+/* Table cells */
+.prose td {
+	border: 1px solid #666;
+	padding: 12px 20px;
+	text-align: left;
+}
+
+/* Alternating row backgrounds */
+.prose tbody tr:nth-child(even) {
+	background-color: rgba(128, 128, 128, 0.08);
+}
+
+/* Optional hover effect */
+.prose tbody tr:hover {
+	background-color: rgba(128, 128, 128, 0.15);
+}
+.prose tbody tr:hover {
+	background-color: rgba(128, 128, 128, 0.15);
+}
+
+.prose .mermaid svg {
+	max-width: 100%;
+	height: auto;
+}
 textarea {
 	width: 100%;
 	font-size: 16px;
