@@ -18,5 +18,5 @@ const { Content } = await render(post);
 
 <BlogPost {...post.data} wide={Boolean(post.data.photoGallery)}>
 	<Content />
-	{post.data.photoGallery && <PhotoGallery folder={post.data.photoGallery} />}
+	{post.data.photoGallery && <PhotoGallery folder={post.data.photoGallery} captions={post.data.photoCaptions} />}
 </BlogPost>

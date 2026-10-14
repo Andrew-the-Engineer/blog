@@ -26,6 +26,7 @@ const fun = defineCollection({
 	schema: ({ image }) =>
 		z.object({
 			photoGallery: z.string().regex(/^[A-Za-z0-9_-]+$/, 'Use a folder name inside src/assets').optional(),
+			photoCaptions: z.record(z.string(), z.string()).optional(),
 			title: z.string(),
 			description: z.string(),
 			// Transform string to Date object
