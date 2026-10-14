@@ -5,6 +5,21 @@ import type { ImageMetadata } from 'astro';
 interface Props { folder: string }
 const { folder } = Astro.props;
 
+// Match filenames exactly. Leave a caption empty to hide it.
+const captions: Record<string, string> = {
+  'Beach.JPEG': 'Edgewater Beach, one of my favorite places to hang out on a hot summer day.',
+  'Beach1.JPEG' : 'The beach at Rocky River Park. It\'s smaller but the sudden transition from trees, to sand, to water is really beautiful.',
+  'BoardWalk.JPEG': 'The boardwalk along the Flats East Bank. I love seeing the moveable bridges that allow shipping through the Cuyahoga River.',
+  'Bridge.JPG': 'A close up of one of the bridges along the Cuyahoga River. The rusting and industrial machine is a nice juxtaposition against the river.',
+  'ClevelandNight.JPEG': 'Cleveland, lit up at night.',
+  'Flats3.JPEG': 'The Flats West bank, this area used to be an industrial area, but has been revitalized into a beautiful trail',
+  'FlatsShore.JPEG': 'Another image from the Flats East Bank, this time at a park along the shore.',
+  'Pier.JPEG': 'A pier along the shore of Lake Erie.',
+  'RockyRiver.JPEG': 'A view of the Rocky River from above.',
+  'Sunset.JPEG': 'Sunset over Lake Erie',
+  'Water.JPEG': 'A photo of some structures in Lake Erie, taken from the pier.',
+};
+
 const images = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/**/*.{jpg,jpeg,JPG,JPEG,png,PNG,webp}',
   { eager: true },
@@ -13,6 +28,7 @@ const photos = Object.entries(images)
   .filter(([path]) => path.slice(0, path.lastIndexOf('/')) === `../assets/${folder}`)
   .sort(([a], [b]) => a.localeCompare(b)).map(([path, image]) => ({
   image: image.default,
+  caption: captions[path.split('/').pop()!] ?? '',
   label: path.split('/').pop()!.replace(/\.[^.]+$/, '').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/(\D)(\d)/g, '$1 $2'),
 }));
 if (photos.length === 0) {
@@ -21,12 +37,12 @@ if (photos.length === 0) {
 ---
 
 <div class="photo-gallery">
-  {photos.map(({ image, label }) => (
+  {photos.map(({ image, label, caption }) => (
     <figure>
       <a href={image.src} aria-label={`View full photo: ${label}`}>
         <Image src={image} alt={label} widths={[400, 800, 1200]} sizes="(max-width: 640px) 90vw, (max-width: 1000px) 45vw, 30vw" format="webp" loading="lazy" />
       </a>
-      <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+      {caption && <figcaption>{caption}</figcaption>}
     </figure>
   ))}
 </div>
