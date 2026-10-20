@@ -6,11 +6,15 @@ heroImage: '../../assets/FunPhotos/Bridge.JPG'
 photoGallery: 'FunPhotos'
 # Match filenames exactly, including capitalization. Omit or leave empty to hide a caption.
 photoCaptions:
+  Abandoned_Building.JPG: 'An abandoned building I cam across while hiking.'
   Beach.JPEG: 'Edgewater Beach, one of my favorite places to hang out on a hot summer day.'
   Beach1.JPEG: 'The beach at Rocky River Park. It''s smaller but the sudden transition from trees, to sand, to water is really beautiful.'
+  BestInTheLand.JPEG: 'Edgewater Beach, a great place for a summer swim.' 
   BoardWalk.JPEG: 'The boardwalk along the Flats East Bank. I love seeing the moveable bridges that allow shipping through the Cuyahoga River.'
   Bridge.JPG: 'A close up of one of the bridges along the Cuyahoga River. The rusting and industrial machine is a nice juxtaposition against the river.'
   FlatsShore.JPEG: 'Another image from the Flats East Bank, this time at a park along the shore.'
+  Cleveland_Edgewater.JPG: 'The view of Downtown from Edgewater beach.' 
+  Cleveland_Night.JPG: 'Downtown Cleveland from Lakewood Park at night'
 tooltip: 'A bridge along the Cuyahoga River in Cleveland'
 caption: 'This might be my favorite photo of the collection. '
 
