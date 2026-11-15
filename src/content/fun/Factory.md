@@ -2,7 +2,7 @@
 title: 'Factory Photos'
 description: 'Some industrial photos.'
 pubDate: 'Nov 15 2026'
-heroImage: '../../assets/FactoryPhotos/Factory3.JPEG'
+heroImage: '../../assets/FactoryPhotos/Factory3.jpeg'
 photoGallery: 'FactoryPhotos'
 # Match filenames exactly, including capitalization. Omit or leave empty to hide a caption.
 ---
